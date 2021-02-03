@@ -11,12 +11,6 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "statemachine", "statemachin
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "switch", "switch\switch.cproj", "{44C54910-9DC0-4065-B20E-0A272250ADBE}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht 2", "..\..\..\..\Microcontrollers - les 1\Opdracht 1\Opdracht 2.cproj", "{6C1CB607-5E89-4DB3-987A-3997B0966FAA}"
-EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht 3", "..\..\..\..\Microcontrollers - les 1\Opdracht 3\Opdracht 3.cproj", "{CBB03392-6873-49AA-BADF-19A29F038439}"
-EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht 1", "..\..\..\..\Microcontrollers - les 1\Opdracht 1\Opdracht 1.cproj", "{A3D5BCD1-E073-42A2-BCD0-81AB2B6FB615}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -39,14 +33,6 @@ Global
 		{44C54910-9DC0-4065-B20E-0A272250ADBE}.Debug|AVR.Build.0 = Debug|AVR
 		{44C54910-9DC0-4065-B20E-0A272250ADBE}.Release|AVR.ActiveCfg = Release|AVR
 		{44C54910-9DC0-4065-B20E-0A272250ADBE}.Release|AVR.Build.0 = Release|AVR
-		{6C1CB607-5E89-4DB3-987A-3997B0966FAA}.Debug|AVR.ActiveCfg = Debug|AVR
-		{6C1CB607-5E89-4DB3-987A-3997B0966FAA}.Debug|AVR.Build.0 = Debug|AVR
-		{6C1CB607-5E89-4DB3-987A-3997B0966FAA}.Release|AVR.ActiveCfg = Release|AVR
-		{6C1CB607-5E89-4DB3-987A-3997B0966FAA}.Release|AVR.Build.0 = Release|AVR
-		{CBB03392-6873-49AA-BADF-19A29F038439}.Debug|AVR.ActiveCfg = Debug|AVR
-		{CBB03392-6873-49AA-BADF-19A29F038439}.Debug|AVR.Build.0 = Debug|AVR
-		{CBB03392-6873-49AA-BADF-19A29F038439}.Release|AVR.ActiveCfg = Release|AVR
-		{CBB03392-6873-49AA-BADF-19A29F038439}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
