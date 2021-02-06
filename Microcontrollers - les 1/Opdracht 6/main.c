@@ -22,6 +22,7 @@ int main(void)
     PORTC = 0x01;
 	dur = 500;
 	bool = 0;
+	visited = 1;
     while (1) 
     {
 		PORTD = 0x80;
