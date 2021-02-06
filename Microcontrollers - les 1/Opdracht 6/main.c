@@ -14,6 +14,7 @@ void toggle();
 
 int dur;
 int bool;
+int visited;
 
 int main(void)
 {
@@ -35,12 +36,13 @@ void wait( int ms ){
 	for (int i=0; i<ms; i++) {
 		_delay_ms( 1 );
 		
-		if (PINC & 0x01){
+		if (PINC & 0x01 && visited){
 			toggle();
+			visited = 0;
 			return;
 		}
-		
 	}
+	visited = 1;
 }
 
 void toggle(){
