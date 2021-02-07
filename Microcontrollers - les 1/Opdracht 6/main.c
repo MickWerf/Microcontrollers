@@ -33,10 +33,10 @@ int main(void)
     }
 }
 
+//Waits for the given amount of time in milliseconds and checks if the button has been pressed
 void wait( int ms ){
 	for (int i=0; i<ms; i++) {
 		_delay_ms( 1 );
-		
 		if (PINC & 0x01 && visited){
 			toggle();
 			visited = 0;
@@ -46,6 +46,7 @@ void wait( int ms ){
 	visited = 1;
 }
 
+//Toggles between the different durations of Hz.
 void toggle(){
 	if (bool)
 	{
