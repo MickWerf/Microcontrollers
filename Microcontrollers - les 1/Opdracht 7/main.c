@@ -10,7 +10,7 @@
 #include <util/delay.h>
 
 void setCharliePlexingLed();
-void clearleds();
+void clearLeds();
 void wait();
 
 int main(void)
@@ -20,7 +20,7 @@ int main(void)
 		for (int i = 0; i < 6; i++)
 		{
 			setCharliePlexingLed(i);
-			wait(250);
+			wait(1000);
 		}
 		clearLeds(); // turns all leds off.
 		wait(500); // waits 500 miliseconds between loops to save people eyesight.
@@ -32,27 +32,27 @@ void setCharliePlexingLed(int lednr) {
 	clearLeds();
 	switch (lednr)
 	{
-	case 1 :
+	case 0:
 		DDRD = 0b00000011;
 		PORTD = 0x01;
 		break;
-	case 2 :
+	case 1 :
 		DDRD = 0b00000011;
+		PORTD = 0x02;
+		break;
+	case 2 :
+		DDRD = 0b00000110;
 		PORTD = 0x02;
 		break;
 	case 3 :
 		DDRD = 0b00000110;
-		PORTD = 0x02;
-		break;
-	case 4 :
-		DDRD = 0b00000110;
 		PORTD = 0x04;
 		break;
-	case 5 :
+	case 4 :
 		DDRD = 0b00000101;
 		PORTD = 0x04;
 		break;
-	case 6 :
+	case 5 :
 		DDRD = 0b00000101;
 		PORTD = 0x01;
 		break;
