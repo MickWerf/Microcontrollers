@@ -12,7 +12,7 @@
 
 void display(int digit);
 int count;
-
+int bool;
 int main(void)
 {
 	DDRD = 0xFF; // sets all PORTD Leds to output.
@@ -22,15 +22,21 @@ int main(void)
 	sei(); // Turns all interrupts on.
 	
 	count = 0;
+	bool = 1;
 	display(count);
 	
 	while (1)
 	{
+		wait(100);
+		bool = 1;
 	}
 }
 
 // Interrupt using the PE4 button.
 ISR(INT4_vect ) {
+	if (bool)
+	{
+		bool = 0;
 	if (PINE & 0x20)
 	{
 		count = 0;
@@ -38,10 +44,14 @@ ISR(INT4_vect ) {
 		count++;	
 	}
 	display(count);
+	}
 }
 
 // Interrupt using the PE5 button.
 ISR (INT5_vect) {
+	if (bool)
+	{
+	bool = 0;
 	if (PINE & 0x10)
 	{
 		count = 0;
@@ -49,6 +59,7 @@ ISR (INT5_vect) {
 	count--;	
 	}
 	display(count);
+	}
 }
 
 

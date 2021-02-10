@@ -10,6 +10,8 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+int bool;
+
 int main(void)
 {
     DDRD = 0xFF; // sets all PORTD Leds to output.
@@ -19,29 +21,44 @@ int main(void)
 	EICRB |= 0x0F; // Configures the INT4 and INT5 buttons as rising edge. (EICRB applies to INT 4 through 7).
 	EIMSK |= 0x30; // Enables the INT4 and INT5 interrupts.
 	sei(); // Turns all interrupts on.
-	
+	bool = 1;
     while (1) 
     {
+		wait(100);
+		bool = 1;
     }
 }
 
 // Interrupt using the PE4 button.
 ISR(INT4_vect ) {
-	if (PORTD == 0x80) //Checks if led is at an edge, if so wrap.
+	if (bool)
 	{
-		PORTD = 0x01;
-	} else {
-		PORTD = PORTD << 1;
+		bool = 0;
+		if (PORTD == 0x80) //Checks if led is at an edge, if so wrap.
+		{
+			PORTD = 0x01;
+		} else {
+			PORTD = PORTD << 1;
+		}
 	}
 }
 
 // Interrupt using the PE5 button.
 ISR (INT5_vect) {
-	if (PORTD == 0x01) //Checks if led is at an edge, if so wrap.
+	if (bool)
 	{
-		PORTD = 0x80;
+		bool = 0;
+		if (PORTD == 0x01) //Checks if led is at an edge, if so wrap.
+		{
+			PORTD = 0x80;
 		} else {
-		PORTD = PORTD >> 1;
+			PORTD = PORTD >> 1;
+		}
 	}
 }
 
+void wait( int ms ) {
+	for (int i=0; i<ms; i++) {
+		_delay_ms( 1 );
+	}
+}
