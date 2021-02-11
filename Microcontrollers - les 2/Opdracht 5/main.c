@@ -17,8 +17,8 @@ int main(void)
     while (1) 
     {
 		init();
-		display_text("test");
-		set_cursor(1);
+		//display_text("test");
+		//set_cursor(1);
     }
 }
 
