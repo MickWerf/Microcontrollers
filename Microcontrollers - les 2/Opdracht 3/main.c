@@ -28,37 +28,41 @@ int main(void)
 	while (1)
 	{
 		wait(100);
-		bool = 1;
+		bool = 1; // prevents double triggers in a single interrupt cycle.
 	}
 }
 
 // Interrupt using the PE4 button.
 ISR(INT4_vect ) {
-	if (bool)
+	if (bool) // prevents double triggers in a single interrupt cycle.
 	{
 		bool = 0;
-	if (PINE & 0x20)
-	{
-		count = 0;
-	}else{
-		count++;	
-	}
-	display(count);
+		if (PINE & 0x20) // checks if the other button is pressed as well.
+		{
+			count = 0;
+		}	
+		else
+		{
+			count++;	
+		}
+		display(count);
 	}
 }
 
 // Interrupt using the PE5 button.
 ISR (INT5_vect) {
-	if (bool)
+	if (bool) // prevents double triggers in a single interrupt cycle.
 	{
-	bool = 0;
-	if (PINE & 0x10)
-	{
-		count = 0;
-	}else{
-	count--;	
-	}
-	display(count);
+		bool = 0;
+		if (PINE & 0x10) // checks if the other button is pressed as well.
+		{
+			count = 0;
+		} 
+		else 
+		{
+			count--;	
+		}
+		display(count);
 	}
 }
 
@@ -66,55 +70,55 @@ ISR (INT5_vect) {
 void display(int digit){
 	switch(digit){
 		case 0:
-			PORTD = 0x3F;
+			PORTD = 0x3F; // Hexadecimal value for "0".
 			break;
 		case 1:
-			PORTD = 0x06;
+			PORTD = 0x06; // Hexadecimal value for "1".
 			break;
 		case 2:
-			PORTD = 0x5B;
+			PORTD = 0x5B; // Hexadecimal value for "2".
 			break;
 		case 3:
-			PORTD = 0x4F;
+			PORTD = 0x4F; // Hexadecimal value for "3".
 			break;
 		case 4:
-			PORTD = 0x66;
+			PORTD = 0x66; // Hexadecimal value for "4".
 			break;
 		case 5:
-			PORTD = 0x6D;
+			PORTD = 0x6D; // Hexadecimal value for "5".
 			break;
 		case 6:
-			PORTD = 0x7D;
+			PORTD = 0x7D; // Hexadecimal value for "6".
 			break;
 		case 7:
-			PORTD = 0x07;
+			PORTD = 0x07; // Hexadecimal value for "7".
 			break;
 		case 8:
-			PORTD = 0x7f;
+			PORTD = 0x7f; // Hexadecimal value for "8".
 			break;
 		case 9:
-			PORTD = 0x6F;
+			PORTD = 0x6F; // Hexadecimal value for "9".
 			break;
-			case 10:
-			PORTD = 0x77;
+		case 10:
+			PORTD = 0x77; // Hexadecimal value for "A".
 			break;
-			case 11:
-			PORTD = 0x7C;
+		case 11:
+			PORTD = 0x7C; // Hexadecimal value for "B".
 			break;
-			case 12:
-			PORTD = 0x39;
+		case 12:
+			PORTD = 0x39; // Hexadecimal value for "C".
 			break;
-			case 13:
-			PORTD = 0x5E;
+		case 13:
+			PORTD = 0x5E; // Hexadecimal value for "D".
 			break;
-			case 14:
-			PORTD = 0x79;
+		case 14:
+			PORTD = 0x79; // Hexadecimal value for "E".
 			break;
-			case 15:
-			PORTD = 0x71;
+		case 15:
+			PORTD = 0x71; // Hexadecimal value for "F".
 			break;
 		default:
-			PORTD = 0x79;
+			PORTD = 0x79; // Hexadecimal value for "E".
 			break;
 	}
 }

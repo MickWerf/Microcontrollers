@@ -25,7 +25,7 @@ int main(void)
     while (1) 
     {
 		wait(100);
-		bool = 1;
+		bool = 1; // prevents double triggers during a single interrupt cycle.
     }
 }
 
@@ -34,11 +34,11 @@ ISR(INT4_vect ) {
 	if (bool)
 	{
 		bool = 0;
-		if (PORTD == 0x80) //Checks if led is at an edge, if so wrap.
+		if (PORTD == 0x80) // checks if led is at an edge.
 		{
-			PORTD = 0x01;
+			PORTD = 0x01; // if the end of the cycle is reached, wrap by resetting the PORTD active pin to the opposite side.
 		} else {
-			PORTD = PORTD << 1;
+			PORTD = PORTD << 1; // otherwise, move the active PORTD pin backwards through bit shifting.
 		}
 	}
 }
@@ -48,11 +48,11 @@ ISR (INT5_vect) {
 	if (bool)
 	{
 		bool = 0;
-		if (PORTD == 0x01) //Checks if led is at an edge, if so wrap.
+		if (PORTD == 0x01) //Checks if led is at an edge.
 		{
-			PORTD = 0x80;
+			PORTD = 0x80; // if the end of the cycle is reached, wrap by resetting the PORTD active pin to the opposite side.
 		} else {
-			PORTD = PORTD >> 1;
+			PORTD = PORTD >> 1; // otherwise, move the active PORTD pin forwards through bit shifting.
 		}
 	}
 }
