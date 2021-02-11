@@ -11,16 +11,16 @@
 
 int main(void)
 {
-	DDRD = 0b11111110;
+	DDRD = 0b11111110; // sets all PORTD pins except for PORTD pin 0 as output.
 	PORTC = 0x01;
-    /* Replace with your application code */
+	
     while (1) 
     {
-		while(PINC & 0x01)
+		while(PINC & 0x01) // checks if PORTD pin 1 is detecting a button press.
 		{
-			PORTD = 0x80;
+			PORTD = 0x80; // turns PORTD pin 7 on.
 			wait(500);
-			PORTD = 0x00;
+			PORTD = 0x00; // turns PORTD pin 7 off.
 			wait(500);
 			
 		}

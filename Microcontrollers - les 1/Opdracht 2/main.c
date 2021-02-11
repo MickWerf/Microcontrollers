@@ -17,10 +17,10 @@ int main(void)
     
     while (1) 
     {
-		PORTD = 0x80;
-		wait (500);
-		PORTD = 0x40;
-		wait (500);
+		PORTD = 0x80;	// turns led 7 on, all others off.
+		wait (500);		// waits before moving on to avoid epilepsy vulnerable situations.
+		PORTD = 0x40;	// turns led 6 on, all others off.
+		wait (500);		// waits before moving on to avoid epilepsy vulnerable situations.
     }
 }
 

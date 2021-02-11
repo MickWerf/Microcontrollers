@@ -13,16 +13,16 @@
 
 int main(void)
 {
-	DDRD = 0b11111111;
-	PORTD = 0x01;
+	DDRD = 0b11111111; // sets all PORTD pins as output.
+	PORTD = 0x01; // turns the PORTD pin 0 led on.
 	wait(50);
 	
     while (1) 
     {
-		PORTD = PORTD << 1;
-		if (PORTD == 0x00)
+		PORTD = PORTD << 1; // through bit shifting, moves the active pin/led to the next pin and turns off the current one.
+		if (PORTD == 0x00) // checks if the cycle has reached it's end.
 		{
-			PORTD = 0x01;
+			PORTD = 0x01; // restarts the loop by setting the first pin on.
 		}
 		wait(50);
     }
