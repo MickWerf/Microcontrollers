@@ -1,31 +1,17 @@
 #define F_CPU 8e6
-
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#define BIT(x)			(1 << (x))
+
+
 #define LCD_E 3
 #define LCD_RS 2
 
-void init();
-void display_text(char *str);
-void set_cursor(int position);
-void wait( int ms );
-void init_hello_world();
-void lcd_ledge_e(void);
-void lcd_set_cursor_position_1_left();
-void lcd_set_cursor_position_1_right();
-void lcd_return_home();
-void lcd_write_charCMD(char cmd);
-void lcd_write_char(char message);
-void lcd_write_line1(char text[]);
-void lcd_write_line2(char text[]);
-void lcd_reset();
-void lcd_clear_screen();
-void lcd_set_cursor_left_to_right();
-void lcd_set_cursor_blinking_block();
-void lcd_switch_power();
-
+void lcd_clear_screen(){
+	lcd_write_charCMD(0x01);
+}
 void init(){
 	
 	DDRC = 0xFF;
@@ -51,11 +37,6 @@ void init(){
 	
 	PORTC = 0x60;
 	lcd_ledge_e();
-	
-	//lcd_reset();
-	//lcd_clear_screen();
-	//lcd_set_cursor_left_to_right();
-	//lcd_set_cursor_blinking_block();
 }
 
 //START init functions
@@ -65,21 +46,6 @@ void lcd_reset(){
 	for(int i = 0;i < 2; i++){
 		lcd_write_charCMD(0x38);
 	}
-}
-
-//(doens't work)
-void lcd_clear_screen(){
-	lcd_write_charCMD(0x01);
-}
-
-//lcd command 6 in hex (doens't work)
-void lcd_set_cursor_left_to_right(){
-	lcd_write_charCMD(0x06);
-}
-
-//turns on visible blinking block (doens't work)
-void lcd_set_cursor_blinking_block(){
-	lcd_write_charCMD(0x0F);
 }
 
 //END init functions
@@ -138,13 +104,14 @@ void set_cursor(int position){
 		lcd_set_cursor_position_1_right();
 	}
 }
-
-//(doens't work)
-void lcd_set_cursor_position_1_left(){
-	lcd_write_charCMD(0x10);
+// wait(): busy waiting for 'ms' millisecond
+// Used library: util/delay.h
+void wait( int ms ) {
+	for (int tms=0; tms<ms; tms++) {
+		_delay_ms( 1 );			// library function (max 30 ms at 8MHz)
+	}
 }
 
-//(doens't work)
 void lcd_set_cursor_position_1_right(){
 	lcd_write_charCMD(0x14);
 }
@@ -154,32 +121,49 @@ void lcd_return_home(){
 	lcd_write_charCMD(0x02); //used to return home
 }
 
-//(doens't work)
-void lcd_switch_power(){
-	lcd_write_charCMD(0x00);
+char* itoa(int i){
+	char const digit[] = "0123456789";
+	char* p;
+	if(i<0){
+		*p++ = '-';
+		i *= -1;
+	}
+	int shifter = i;
+	do{ //Move to where representation ends
+		++p;
+		shifter = shifter/10;
+	}while(shifter);
+	*p = '\0';
+	do{ //Move back, inserting digits as u go
+		*--p = digit[i%10];
+		i = i/10;
+	}while(i);
+	return p;
 }
 
-void wait( int ms ) {
-	for (int i=0; i<ms; i++) {
-		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
+
+int main(void) {
+	
+	DDRD &= ~BIT(7);		// PD7 op input: DDRD=xxxx xxx0
+	DDRB = 0xFF;			// PORTB is output
+	TCCR2 = 0b00000111;		// counting via PD7, rising edge
+
+init();
+int buffer;
+int numBuf;
+int num = 10;
+lcd_clear_screen();
+set_cursor(0);
+	while (1) {
+		if (buffer != TCNT2)
+		{
+			buffer = TCNT2;
+			lcd_clear_screen();
+			set_cursor(0);
+			num = TCNT2;
+			display_text(itoa(num));
+			PORTB = TCNT2;	
+		}
+		wait(10);
 	}
 }
-
-int main(void)
-{
-	DDRD = 0xFF;
-	init();
-	lcd_clear_screen();
-	set_cursor(0);
-	display_text("Test");
-	set_cursor(6);
-	display_text("tekst1");
-	int i = 0;
-	while (1)
-	{
-			// Toggle PORTD.7
-		wait( 250 );
-		i++;
-	}
-}
-
