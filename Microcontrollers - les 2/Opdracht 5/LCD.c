@@ -17,9 +17,9 @@
 
 void lcd_strobe_lcd_e(void) {
 	PORTC |= (1<<LCD_E);	// E high
-	_delay_ms(1);			// nodig
+	_delay_ms(1);			// timout for insurance
 	PORTC &= ~(1<<LCD_E);  	// E low
-	_delay_ms(1);			// nodig?
+	_delay_ms(1);			// timout for insurance
 }
 
 void init() // Initializes the LCD Screen.
@@ -27,27 +27,26 @@ void init() // Initializes the LCD Screen.
 	DDRC = 0xFF;
 	PORTC = 0x00;
 
-	// Step 2 (table 12)
-	PORTC = 0x20;
+	// Return Home
+	PORTC = 0x02;
 	lcd_strobe_lcd_e();
 
-	// Step 3 (table 12)
-	PORTC = 0x20;
+	//set function: 4 bits interface data, 2 lines, 5x8 dots
+	PORTC = 0x28;
 	lcd_strobe_lcd_e();
+	
+	// display: on, cursor on, blinking on
+	PORTC = 0x0F
+	lcd_strobe_lcd_e()
+	
+	// entry mode: cursor to right, no shift 
+	PORTC = 0x06 ;
+	lcd_strobe_lcd_e()
+	
+	// RAM address: 0, first position, line 1 
 	PORTC = 0x80;
-	lcd_strobe_lcd_e();
-
-	// Step 4 (table 12)
-	PORTC = 0x00;
-	lcd_strobe_lcd_e();
-	PORTC = 0xF0;
-	lcd_strobe_lcd_e();
-
-	// Step 4 (table 12)
-	PORTC = 0x00;
-	lcd_strobe_lcd_e();
-	PORTC = 0x60;
-	lcd_strobe_lcd_e();
+	lcd_strobe_lcd_e()
+	
 }
 		 
 void display_text(char *str) // Displays a text on the LCD Screen.
