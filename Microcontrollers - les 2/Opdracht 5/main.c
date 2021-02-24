@@ -16,7 +16,7 @@ void delay( int ms );
 int main(void)
 {
 	init();
-	display_text("testing working");
+	display_text("Liquid Crystal");
 	//set_cursor(1);
 	
     while (1)

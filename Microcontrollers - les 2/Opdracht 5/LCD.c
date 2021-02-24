@@ -32,6 +32,14 @@ void init() // Initializes the LCD Screen.
 	DDRC = 0xFF;
 	PORTC = 0x00;
 
+	// turn display off
+	write_command(0x00);
+	lcd_strobe_lcd_e();
+
+	// clear display
+	write_command(0x01);
+	lcd_strobe_lcd_e();
+	
 	// Return Home
 	write_command(0x02);
 	lcd_strobe_lcd_e();
