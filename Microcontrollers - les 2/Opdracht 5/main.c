@@ -11,14 +11,23 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+void delay( int ms );
 
 int main(void)
 {
-    while (1) 
+	init();
+	display_text("testing working");
+	//set_cursor(1);
+	
+    while (1)
     {
-		init();
-		//display_text("test");
-		//set_cursor(1);
+		delay(200);	
     }
+}
+
+void delay( int ms ) {
+	for (int i=0; i<ms; i++) {
+		_delay_ms( 1 );
+	}
 }
 

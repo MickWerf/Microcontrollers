@@ -12,6 +12,8 @@
 
 int bool;
 
+void wait( int ms );
+
 int main(void)
 {
     DDRD = 0xFF; // sets all PORTD Leds to output.
