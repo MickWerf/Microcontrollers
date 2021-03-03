@@ -148,12 +148,12 @@ int main(void) {
 	DDRB = 0xFF;			// PORTB is output
 	TCCR2 = 0b00000111;		// counting via PD7, rising edge
 
-init();
-int buffer;
-int numBuf;
-int num = 10;
-lcd_clear_screen();
-set_cursor(0);
+	init();
+	int buffer;
+	int numBuf;
+	int num = 10;
+	lcd_clear_screen();
+	set_cursor(0);
 	while (1) {
 		if (buffer != TCNT2)
 		{
@@ -162,7 +162,7 @@ set_cursor(0);
 			set_cursor(0);
 			num = TCNT2;
 			display_text(itoa(num));
-			PORTB = TCNT2;	
+			PORTB = TCNT2;
 		}
 		wait(10);
 	}
