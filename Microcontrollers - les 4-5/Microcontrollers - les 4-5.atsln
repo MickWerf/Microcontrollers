@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht 1", "Opdracht 1\Opdracht 1.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht B2", "Opdracht B2\Opdracht B2.cproj", "{4DF7F26B-4B12-4636-9B37-C32E252669F1}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht B3", "Opdracht B3\Opdracht B3.cproj", "{FDE563D8-93D7-41A9-A59B-019A8FDBE966}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Opdracht C1", "Opdracht C1\Opdracht C1.cproj", "{6BA490CB-1497-4486-9E7D-F98CAB9C3D68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -15,6 +21,18 @@ Global
 		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
 		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
 		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
+		{4DF7F26B-4B12-4636-9B37-C32E252669F1}.Debug|AVR.ActiveCfg = Debug|AVR
+		{4DF7F26B-4B12-4636-9B37-C32E252669F1}.Debug|AVR.Build.0 = Debug|AVR
+		{4DF7F26B-4B12-4636-9B37-C32E252669F1}.Release|AVR.ActiveCfg = Release|AVR
+		{4DF7F26B-4B12-4636-9B37-C32E252669F1}.Release|AVR.Build.0 = Release|AVR
+		{FDE563D8-93D7-41A9-A59B-019A8FDBE966}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FDE563D8-93D7-41A9-A59B-019A8FDBE966}.Debug|AVR.Build.0 = Debug|AVR
+		{FDE563D8-93D7-41A9-A59B-019A8FDBE966}.Release|AVR.ActiveCfg = Release|AVR
+		{FDE563D8-93D7-41A9-A59B-019A8FDBE966}.Release|AVR.Build.0 = Release|AVR
+		{6BA490CB-1497-4486-9E7D-F98CAB9C3D68}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6BA490CB-1497-4486-9E7D-F98CAB9C3D68}.Debug|AVR.Build.0 = Debug|AVR
+		{6BA490CB-1497-4486-9E7D-F98CAB9C3D68}.Release|AVR.ActiveCfg = Release|AVR
+		{6BA490CB-1497-4486-9E7D-F98CAB9C3D68}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

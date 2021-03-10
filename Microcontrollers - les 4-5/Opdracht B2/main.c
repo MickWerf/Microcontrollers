@@ -1,4 +1,3 @@
-
 #define F_CPU 8e6
 
 #include <avr/io.h>
@@ -11,17 +10,19 @@ int main(void)
 	DDRA = 0xFF;
 	DDRB = 0xFF;
 	adcInit();
-    while (1) 
-    {
-	    PORTB = ADCL;
+	while (1)
+	{
+		ADCSRA |= 0x40;
+		while( ADCSRA & 0x40);
+		PORTB = ADCL;
 		PORTA = ADCH;
-		wait(100);
-    }
+		wait(500);
+	}
 }
 
 void adcInit(){
-	ADMUX = 0xE1;
-	ADCSRA = 0xE6;
+	ADMUX = 0xE3;
+	ADCSRA = 0x86;
 }
 
 //Waits for the given amount of time in milliseconds

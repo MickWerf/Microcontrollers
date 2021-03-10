@@ -3,6 +3,8 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+#define LCD_E 3
+#define LCD_RS 2
 int bool;
 
 void wait(int);
