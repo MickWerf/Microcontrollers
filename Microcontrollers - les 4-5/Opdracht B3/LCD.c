@@ -46,7 +46,6 @@ void init() // Initializes the LCD Screen.
 	// RAM address: 0, first position, line 1 
 	write_command(0x80);
 	write_command(0x00);
-	
 }
 		 
 void display_text(char *str) // Displays a text on the LCD Screen.
@@ -58,7 +57,11 @@ void display_text(char *str) // Displays a text on the LCD Screen.
 	 
 void set_cursor(int position) // Sets the cursor on the LCD Screen.
 {
-	
+	write_command(0x02);
+	for (int i = 0; i < position; i++)
+	{
+		write_command(0x14);
+	}
 }
 
 void write_char(char character) {
@@ -79,6 +82,10 @@ void write_command(char command) {
 	PORTC = command << 4; // lage nibble (last chunk)
 	PORTC |= 0x08; // start writing command.
 	lcd_strobe_lcd_e();
+}
+
+void clear() {
+	write_command(0x01);
 }
 
 void wait( int ms ) {

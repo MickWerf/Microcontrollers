@@ -2,8 +2,12 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include "LCD.h"
+
 void wait ( int ms );
 void adcInit();
+char* itoa(int i);
+
 int main(void)
 {
 	DDRF = 0x00;
@@ -16,6 +20,8 @@ int main(void)
 		while( ADCSRA & 0x40);
 		PORTB = ADCL;
 		PORTA = ADCH;
+		clear();
+		display_text(itoa(ADCH));
 		wait(500);
 	}
 }
@@ -23,12 +29,25 @@ int main(void)
 void adcInit(){
 	ADMUX = 0xE3;
 	ADCSRA = 0x86;
+	init();
 }
 
-//Waits for the given amount of time in milliseconds
-void wait( int ms )
-{
-	for (int i=0; i<ms; i++) {
-		_delay_ms( 1 );
+char* itoa(int i){
+	char const digit[] = "0123456789";
+	char* p;
+	if(i<0){
+		*p++ = '-';
+		i *= -1;
 	}
+	int shifter = i;
+	do{ //Move to where representation ends
+		++p;
+		shifter = shifter/10;
+	}while(shifter);
+	*p = '\0';
+	do{ //Move back, inserting digits as u go
+		*--p = digit[i%10];
+		i = i/10;
+	}while(i);
+	return p;
 }
