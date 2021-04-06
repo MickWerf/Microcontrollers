@@ -10,13 +10,15 @@
 #include <stdbool.h>
 #include "LCD.h"
 
+#define fieldSize 64
+
 int field_height = 8;
 int field_width = 8;
 
 int length;
 int score;
 
-struct point history[field_width * field_height];
+struct point history[fieldSize];
 
 struct point fruit;
 
@@ -28,7 +30,8 @@ bool playing = false;
 void initGame() {
     dir = UP;
     length = 3;
-    head = {field_height / 2, field_width / 2};
+    head.x = field_height / 2;
+	head.y = field_width / 2;
 
     for (int i = 0; i < length; ++i) {
         history[i] = head;
@@ -36,15 +39,15 @@ void initGame() {
 
     history[0] = head;
     playing = true;
-    srand((unsigned) time(&t));
+    srand((unsigned) time(NULL));
 }
 
-bool checkValid(point next) {
+bool checkValid(struct point next) {
     if (next.x > field_width || next.x < 0 || next.y > field_height || next.y < 0) {
         return false;
     }
-    for (int i = 0; i < lenth; i++) {
-        if (next.x == history[i] && next.y == history[i]) {
+    for (int i = 0; i < length; i++) {
+        if (next.x == history[i].x && next.y == history[i].y) {
             return false;
         }
     }
@@ -52,36 +55,40 @@ bool checkValid(point next) {
 }
 
 void move() {
-    if (play) {
+    if (playing) {
         struct point next;
         switch (dir) {
             case UP:
-                next = {head.x, head.y + 1};
+                next.x = head.x;
+				next.y = head.y + 1;
                 break;
             case DOWN:
-                next = {head.x, head.y - 1};
+                next.x = head.x;
+				next.y = head.y - 1;
                 break;
             case LEFT:
-                next = {head.x - 1, head.y};
+                next.x = head.x - 1;
+				next.y = head.y;
                 break;
             case RIGHT:
-                next = {head.x + 1, head.y};
+                next.x = head.x + 1; 
+				next.y = head.y;
                 break;
         }
         if (checkValid(next)) {
             struct point buffer1;
             for (int i = 0; i < length; i++) {
                 buffer1 = history[i];
-                history[i] = new;
-                new = buffer1;
+                history[i] = next;
+                next = buffer1;
             }
             if (fruit.x == next.x && fruit.y == next.y) {
-                history[length] = new;
+                history[length] = next;
                 newFruit();
                 length++;
             }
         } else {
-            play = false;
+            playing = false;
         }
     }
 }
@@ -92,14 +99,15 @@ void changeDirection(enum direction newDir) {
 
 void newFruit() {
     bool invalid = true;
-    point new;
+    struct point next;
     while (invalid) {
-        new = {rand() % field_width, rand() % field_height};
-        if (checkValid(new)) {
+        next.x = rand() % field_width;
+		next.y = rand() % field_height;
+        if (checkValid(next)) {
             invalid = false;
         }
     }
-    fruits = new;
+    fruit = next;
 }
 
 int getSizeOfArray(struct point arr[]) {
