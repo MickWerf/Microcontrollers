@@ -27,7 +27,7 @@ void lcd_strobe_lcd_e(void) {
 	_delay_ms(1);			// timout for insurance
 }
 
-void init() // Initializes the LCD Screen.
+void lcd_init() // Initializes the LCD Screen.
 {
 	DDRC = 0xFF;
 	PORTC = 0x00;
@@ -54,6 +54,7 @@ void display_text(char *str) // Displays a text on the LCD Screen.
 	while(*str) { // loops through the string.
 		write_char(*str++);
 	}
+	write_command(0x02);
 }
 	 
 void set_cursor(int position) // Sets the cursor on the LCD Screen.

@@ -5,9 +5,15 @@
  *  Author: Thaom
  */ 
 
-typedef struct point{
+struct Point{
 	int x;
 	int y;
 };
 
-enum direction{UP, DOWN, LEFT, RIGHT};
+enum direction{UP, LEFT, DOWN, RIGHT};
+void initGame();
+void snake_Update();
+void changeDirection(enum direction newDir);
+void moveLeft();
+void moveRight();
+void move();
