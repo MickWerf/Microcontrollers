@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define fieldSize 64
+
 int field_height = 8;
 int field_width = 8;
 int standard_length = 3;
@@ -17,7 +19,7 @@ int standard_length = 3;
 int length;
 int score;
 
-struct Point history[64];
+struct point history[fieldSize];
 
 struct Point fruit;
 
@@ -75,7 +77,6 @@ void initGame(){
 void move() {
 	if (playing)
 	{
-	
         struct Point next = {0,0};
         switch (dir) {
             case UP:

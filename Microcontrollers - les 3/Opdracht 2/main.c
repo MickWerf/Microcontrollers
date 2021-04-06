@@ -40,7 +40,6 @@ int main(void) {
 
 	init();
 	int buffer;
-	int numBuf;
 	int num = 10;
 	clear();
 	set_cursor(0);
